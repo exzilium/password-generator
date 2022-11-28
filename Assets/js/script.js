@@ -126,12 +126,26 @@ generatePassword = function () {
   }
 
   // confirm which types of characters to use when generating password
-  
+
   var userUpperCase = window.confirm("Would you like UPPERCASE letters?");
   var userLowerCase = window.confirm("Would you like lowercase letters?");
   var userNumbers09 = window.confirm("Would you like to use numbers?");
   var userSpecialChars = window.confirm(
     "Do you want your password to be extra special (and secure) by using special characters?"
+  );
+
+  var userContinue = window.confirm(
+    "Thank you. Here's what I have so far - Number of Characters: " +
+      userCharCount +
+      ", Use Uppercase: " +
+      userUpperCase +
+      ", Use Lowercase: " +
+      userLowerCase +
+      ", Use Numbers: " +
+      userNumbers09 +
+      ", Use Specials: " +
+      userSpecialChars +
+      " If this looks good, click OK!"
   );
 
   console.log(
@@ -144,4 +158,12 @@ generatePassword = function () {
       ", Specials: " +
       userSpecialChars
   );
+
+  if (!userContinue) {
+    generatePassword();
+  }
+
+  else{
+
+  }
 };
