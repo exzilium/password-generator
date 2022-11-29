@@ -103,6 +103,10 @@ var specialChars = [
   "~",
 ];
 
+// Global "final array" variable to use in random password generator
+
+var finalUserArray;
+
 // When button is pressed, writePassword is called which contains generatePAssword(), defined here
 
 generatePassword = function () {
@@ -114,7 +118,6 @@ generatePassword = function () {
   var userCharCount = window.prompt(
     "How long would you like your password to be? (Choose between 8 to 128 characters)"
   );
-
   // check to see if user selected between 8-128 characters
 
   if (userCharCount < 8 || userCharCount > 128) {
@@ -125,14 +128,47 @@ generatePassword = function () {
     console.log(userCharCount);
   }
 
-  // confirm which types of characters to use when generating password
+  // Confirm which types of characters to use when generating password, then concat true values to form a final array to randomly choose from
 
   var userUpperCase = window.confirm("Would you like UPPERCASE letters?");
+
+  // if any of the confirm dialogus are true, update global final user array to include uppercase array values
+
+  if (userUpperCase) {
+    finalUserArray = upperCase;
+    console.log(finalUserArray);
+  }
+
   var userLowerCase = window.confirm("Would you like lowercase letters?");
+
+  // if true, concat new array
+
+  if (userLowerCase) {
+    finalUserArray = finalUserArray.concat(lowerCase);
+    console.log(finalUserArray);
+  }
+
   var userNumbers09 = window.confirm("Would you like to use numbers?");
+
+  // if true, concat new array
+
+  if (userNumbers09) {
+    finalUserArray = finalUserArray.concat(numbers09);
+    console.log(finalUserArray);
+  }
+
   var userSpecialChars = window.confirm(
     "Do you want your password to be extra special (and secure) by using special characters?"
   );
+
+  // if true, concat new array
+
+  if (userSpecialChars) {
+    finalUserArray = finalUserArray.concat(specialChars);
+    console.log(finalUserArray);
+  }
+
+  // End of confirmation dialogues. Confirm selections to user.
 
   var userContinue = window.confirm(
     "Thank you. Here's what I have so far - Number of Characters: " +
@@ -159,11 +195,20 @@ generatePassword = function () {
       userSpecialChars
   );
 
-  if (!userContinue) {
-    generatePassword();
-  }
+  // If user clicks OK to continue, generate a password. Else, exit the function.
 
-  else{
+  if (userContinue) {
+    // Generate a random password based on userCharCount
 
+    for (var i = 0; i <= userCharCount; i++) {
+      var randomNumber = Math.floor(Math.random() * finalUserArray.length);
+      generatedPassword += finalUserArray.substring(
+        randomNumber,
+        randomNumber + 1
+      );
+    }
+    console.log(generatedPassword);
+  } else {
+    return;
   }
 };
