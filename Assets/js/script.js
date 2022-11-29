@@ -198,16 +198,21 @@ generatePassword = function () {
   // If user clicks OK to continue, generate a password. Else, exit the function.
 
   if (userContinue) {
-    // Generate a random password based on userCharCount
+    // For the number of values needed...
 
-    for (var i = 0; i <= userCharCount; i++) {
-      var randomNumber = Math.floor(Math.random() * finalUserArray.length);
-      generatedPassword += finalUserArray.substring(
-        randomNumber,
-        randomNumber + 1
-      );
+    // generate a random number for the length of the array
+
+    for (let i = 0; i < userCharCount; i++) {
+      var randomNumber = Math.floor(Math.random() * finalUserArray.length) + 1;
+      console.log(randomNumber);
     }
-    console.log(generatedPassword);
+
+    // That random number will correspond to a character from the array
+
+    //take that character and add it to the generated password
+
+    //console.log(generatedPassword);
+    //return generatedPassword;
   } else {
     return;
   }
