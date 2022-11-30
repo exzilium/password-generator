@@ -103,15 +103,15 @@ var specialChars = [
   "~",
 ];
 
-// Global "final array" variable to concat original arrays above depending on user selections and for use in random password generator
-// Give finalUserArray a single value in an array to prevent concat errors if user chooses "Cancel" which gives "undefined" value, which can't be concat'd
-// "temp" value will be removed from final array after user selections so it doesn't appear in the generated password
-
-var finalUserArray = ["temp"];
-
 // When button is pressed, writePassword is called which contains generatePAssword(), defined here
 
 generatePassword = function () {
+  //  "final array" variable to concat original arrays above depending on user selections and for use in random password generator
+  // Give finalUserArray a single value in an array to prevent concat errors if user chooses "Cancel" which gives "undefined" value, which can't be concat'd
+  // "temp" value will be removed from final array after user selections so it doesn't appear in the generated password
+  var finalUserArray = ["temp"];
+  console.log("reset the finalUserArray? " + finalUserArray);
+
   // Wecome instructions
   window.alert(
     "Hello, there! I will help you create a password using characters of your choosing.\n\nClick OK to continue."
@@ -259,6 +259,7 @@ generatePassword = function () {
     // Return the new value so that it sets the value of generatedPassword() to equal the newly generated password
 
     console.log(newPassword);
+    //console.log(password);
     return newPassword;
   } else {
     // Prompt user to try again or cancel
