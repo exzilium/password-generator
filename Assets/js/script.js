@@ -158,7 +158,7 @@ generatePassword = function () {
   // if any of the confirm dialogus are true, update global final user array to include uppercase array values
 
   if (userUpperCase) {
-    finalUserArray = upperCase;
+    finalUserArray = finalUserArray.concat(upperCase);
     console.log(finalUserArray);
     console.log(userCharCount);
   }
