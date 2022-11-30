@@ -104,8 +104,10 @@ var specialChars = [
 ];
 
 // Global "final array" variable to concat original arrays above depending on user selections and for use in random password generator
+// Give finalUserArray a single value in an array to prevent concat errors if user chooses "Cancel" which gives "undefined" value, which can't be concat'd
+// "temp" value will be removed from final array after user selections so it doesn't appear in the generated password
 
-var finalUserArray;
+var finalUserArray = ["temp"];
 
 // When button is pressed, writePassword is called which contains generatePAssword(), defined here
 
@@ -234,6 +236,11 @@ generatePassword = function () {
   // If user clicks OK to continue, generate a password. Else, exit the function
 
   if (userContinue) {
+    // remove "temp" from finalUserArray so it doesn't appear in generated password
+
+    finalUserArray.shift();
+    console.log(finalUserArray);
+
     // variable to collect the new password from the random number generator and array value picker below
 
     var newPassword = "";
