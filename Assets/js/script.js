@@ -106,122 +106,88 @@ var specialChars = [
 // When button is pressed, writePassword is called which contains generatePAssword(), defined here
 
 generatePassword = function () {
-  /* variable to concat original arrays above depending on user selections and for use in random password generator
-  Give finalUserArray a single value in an array to prevent concat errors if user chooses "Cancel" which gives "undefined" value, which can't be concat'd.
+  /* finalUserArray variable is used to concat the alphanumeric and symbol arrays above into a single array depending on user preference.
+  finalUserArray is given a "temp" value to prevent concat errors if user chooses "Cancel" which gives "undefined" value, which can't be concat'd.
   The "temp" value will be removed from final array after user selections so it doesn't appear in the generated password */
   var finalUserArray = ["temp"];
-
-  // variable to capture the number of characters the user wishes to use to generate a password. Resets when the function is called again if the user tries again.
-  var userCharCount = "";
 
   // variable to collect the new password from the random number generator and array value picker below
   var newPassword = "";
 
-  // Wecome instructions
+  // User instructions: Wecome
   window.alert(
     "Hello, there! I will help you create a password using characters of your choosing.\n\nClick OK to continue."
   );
-  // User Chooses number of characters to use when generating password
+  // User instructions: Chooses number of characters to use when generating password
 
   var userCharCount = window.prompt(
     "How long would you like your password to be? (Choose between 8 to 128 characters)"
   );
-  // Check to see if user selected between 8-128 characters
+  // Error check: Did user select between 8-128 numberical chars. If error: Exit workflow and try again.
 
   if (userCharCount < 8 || userCharCount > 128 || isNaN(userCharCount)) {
-    // If a number is outside the 8-128 or not a number, re-start workflow.
-
+    // User instructions: re-start workflow.
     var errorContinue = window.alert(
       "Please choose a number between 8 and 128.\nTry again!"
     );
     return "Try Again";
-    // // CONDITIONAL LOGIC for better user experience to implement when I know how to fix "CODE ISSUES" below: Change window.alert to window.confirm and remove return "try again";
-    //   if (errorContinue) {
-    //     // reset userCharCount to prevent "undefined" return value when the user retries the "generate password" function again
-    //     userCharCount = "";
-    // // CODE ISSUE - when you call "generatePassword()" it will run, give you a password, but then return "141" when it's done. Need to learn conditional logic best practices.
-    // generatePassword();
-    //     return "141";
-    //   } else {
-    //     // If user cancels, exit the function
-    //     window.alert("Understandable. Have a nice day. ✌️");
-    //     // reset userCharCount to prevent "undefined" return value if the user retries the "generate password" function again
-    //     userCharCount = "";
-    //return "147";
-    //   }
-
-    //   // If user entry is valid and user clicks OK, continue the workflow
-    // } else {
-    //   window.alert(
-    //     "You chose: " +
-    //       userCharCount +
-    //       ". One of my favorite numbers!\nLet's choose what type of characters you'd like in your password."
-    //   );
   }
 
-  // Confirm which types of characters to use when generating password, then concat true values to form a final array to randomly choose from
+  // User instructions: Confirm which types of characters to use when generating password
 
+  // --UPPERCASE--
   var userUpperCase = window.confirm(
     "Would you like to use 'UPPERCASE' letters?"
   );
 
-  // if any of the confirm dialogus are true, update global final user array to include uppercase array values
+  // If true, concat onto final array for password generation
 
   if (userUpperCase) {
     finalUserArray = finalUserArray.concat(upperCase);
   }
-
+  // --LOWERCASE--
   var userLowerCase = window.confirm(
     "Would you like to use 'lowercase' letters?"
   );
 
-  // if true, concat new array
+  // If true, concat onto final array for password generation
 
   if (userLowerCase) {
     finalUserArray = finalUserArray.concat(lowerCase);
   }
-
+  // --NUMBERS--
   var userNumbers09 = window.confirm(
     "Would you like to use numbers?\nI'll try to pick a few lucky ones."
   );
 
-  // if true, concat new array
+  // If true, concat onto final array for password generation
 
   if (userNumbers09) {
     finalUserArray = finalUserArray.concat(numbers09);
   }
-
+  // --SPECIAL CHARS--
   var userSpecialChars = window.confirm(
     "Do you want your password to be extra special (and extra secure) by using *special* characters?"
   );
 
-  // if all values are false, prompt to try again
+  // Error check: If all char type selections are false, prompt to try again
 
   if (!userUpperCase && !userLowerCase && !userNumbers09 && !userSpecialChars) {
+    // User instruction: Choose a type of character and restart workflow
     var errorContinue = window.alert(
       "You have to let me use some type of characters!\nTry again!"
     );
     return "Try Again";
-    // // CONDITIONAL LOGIC for better user experience to implement when I know how to fix "CODE ISSUES" below: Change window.alert to window.confirm and remove return "try again";
-    // // If user wants to continue, restart the function
-    // if (errorContinue) {
-    // // CODE ISSUE when you call "generatePassword()" it will run, give password, and then return "205" when it's done.
-    //   generatePassword();
-    //   return "205";
-    // } else {
-    //   // If user cancels, exit the function
-    //   window.alert("Understandable. Have a nice day. ✌️");
-
-    //   return "210";
-    // }
   }
-  // if specialChar selection is true, concat new array
+  // If true, concat onto final array for password generation
 
   if (userSpecialChars) {
     finalUserArray = finalUserArray.concat(specialChars);
   }
 
-  // End of confirmation dialogues for choosing character types. Confirm selections to user.
+  // End of char type confirmation dialogues
+
+  // User instruction: Confirm selections
 
   var userContinue = window.confirm(
     "Thank you. Here's what I have so far -\nNumber of Characters: " +
@@ -234,22 +200,23 @@ generatePassword = function () {
       userNumbers09 +
       "\nUse Special Characters: " +
       userSpecialChars +
-      "\n\nIf this looks good, click OK!"
+      "\n\nIf this looks good, click OK! Otherwise, please try again."
   );
 
-  // If user clicks OK to continue, generate a password. Else, exit the function
+  // If user clicks OK to continue, generate a password. Else, exit the workflow and try again.
 
   if (userContinue) {
-    // remove "temp" from finalUserArray so it doesn't appear in generated password
+    // --GENERATE PASSWORD--
 
+    // Remove "temp" from finalUserArray so it doesn't appear in generated password
     finalUserArray.shift();
 
-    // generate a random number for the length of the full concatenated password array
+    // Generate a random number for the length of the finalUserArray concat'd values
 
     for (let i = 0; i < userCharCount; i++) {
       var randomNumber = Math.floor(Math.random() * finalUserArray.length);
 
-      // The above random number will correspond to the index of a character within the array. Take that character and add it to the new generated password variable
+      // The above random number will correspond to the index of a character within the array. Take that character and add it to the new generated password variable.
 
       newPassword += finalUserArray[randomNumber];
     }
@@ -258,13 +225,6 @@ generatePassword = function () {
 
     return newPassword;
   } else {
-    // Prompt user to try again or cancel
-    var errorContinue = window.confirm("Would you like to try again?");
-    if (errorContinue) {
-      generatePassword();
-      return "260";
-    } else {
-      return "262";
-    }
+    return "Try Again";
   }
 };
