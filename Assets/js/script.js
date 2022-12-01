@@ -106,47 +106,57 @@ var specialChars = [
 // When button is pressed, writePassword is called which contains generatePAssword(), defined here
 
 generatePassword = function () {
-  //  "final array" variable to concat original arrays above depending on user selections and for use in random password generator
-  // Give finalUserArray a single value in an array to prevent concat errors if user chooses "Cancel" which gives "undefined" value, which can't be concat'd
-  // "temp" value will be removed from final array after user selections so it doesn't appear in the generated password
+  /* variable to concat original arrays above depending on user selections and for use in random password generator
+  Give finalUserArray a single value in an array to prevent concat errors if user chooses "Cancel" which gives "undefined" value, which can't be concat'd.
+  The "temp" value will be removed from final array after user selections so it doesn't appear in the generated password */
   var finalUserArray = ["temp"];
-  console.log("reset the finalUserArray? " + finalUserArray);
+
+  // variable to capture the number of characters the user wishes to use to generate a password. Resets when the function is called again if the user tries again.
+  var userCharCount = "";
+
+  // variable to collect the new password from the random number generator and array value picker below
+  var newPassword = "";
 
   // Wecome instructions
   window.alert(
     "Hello, there! I will help you create a password using characters of your choosing.\n\nClick OK to continue."
   );
-
   // User Chooses number of characters to use when generating password
 
   var userCharCount = window.prompt(
     "How long would you like your password to be? (Choose between 8 to 128 characters)"
   );
-  // check to see if user selected between 8-128 characters
+  // Check to see if user selected between 8-128 characters
 
   if (userCharCount < 8 || userCharCount > 128 || isNaN(userCharCount)) {
     // If a number is outside the 8-128 or not a number, re-start workflow.
-    console.log(userCharCount);
-    var errorContinue = window.confirm(
-      "Please choose a number between 8 and 128.\nWould you like to try again?"
-    );
-    if (errorContinue) {
-      generatePassword();
-      return;
-    } else {
-      // If user cancels, exit the function
-      window.alert("Understandable. Have a nice day. ✌️");
 
-      return "Try Again";
-    }
-
-    // If user entry is valid and user clicks OK, continue the workflow
-  } else {
-    window.alert(
-      "You chose: " +
-        userCharCount +
-        ". One of my favorite numbers!\nLet's choose what type of characters you'd like in your password."
+    var errorContinue = window.alert(
+      "Please choose a number between 8 and 128.\nTry again!"
     );
+    return "Try Again";
+    // // CONDITIONAL LOGIC for better user experience to implement when I know how to fix "CODE ISSUES" below: Change window.alert to window.confirm and remove return "try again";
+    //   if (errorContinue) {
+    //     // reset userCharCount to prevent "undefined" return value when the user retries the "generate password" function again
+    //     userCharCount = "";
+    // // CODE ISSUE - when you call "generatePassword()" it will run, give you a password, but then return "141" when it's done. Need to learn conditional logic best practices.
+    // generatePassword();
+    //     return "141";
+    //   } else {
+    //     // If user cancels, exit the function
+    //     window.alert("Understandable. Have a nice day. ✌️");
+    //     // reset userCharCount to prevent "undefined" return value if the user retries the "generate password" function again
+    //     userCharCount = "";
+    //return "147";
+    //   }
+
+    //   // If user entry is valid and user clicks OK, continue the workflow
+    // } else {
+    //   window.alert(
+    //     "You chose: " +
+    //       userCharCount +
+    //       ". One of my favorite numbers!\nLet's choose what type of characters you'd like in your password."
+    //   );
   }
 
   // Confirm which types of characters to use when generating password, then concat true values to form a final array to randomly choose from
@@ -159,8 +169,6 @@ generatePassword = function () {
 
   if (userUpperCase) {
     finalUserArray = finalUserArray.concat(upperCase);
-    console.log(finalUserArray);
-    console.log(userCharCount);
   }
 
   var userLowerCase = window.confirm(
@@ -171,8 +179,6 @@ generatePassword = function () {
 
   if (userLowerCase) {
     finalUserArray = finalUserArray.concat(lowerCase);
-    console.log(finalUserArray);
-    console.log(userCharCount);
   }
 
   var userNumbers09 = window.confirm(
@@ -183,8 +189,6 @@ generatePassword = function () {
 
   if (userNumbers09) {
     finalUserArray = finalUserArray.concat(numbers09);
-    console.log(finalUserArray);
-    console.log(userCharCount);
   }
 
   var userSpecialChars = window.confirm(
@@ -194,27 +198,27 @@ generatePassword = function () {
   // if all values are false, prompt to try again
 
   if (!userUpperCase && !userLowerCase && !userNumbers09 && !userSpecialChars) {
-    var errorContinue = window.confirm(
-      "You have to let me use some type of characters!\nWould you like to try again?"
+    var errorContinue = window.alert(
+      "You have to let me use some type of characters!\nTry again!"
     );
+    return "Try Again";
+    // // CONDITIONAL LOGIC for better user experience to implement when I know how to fix "CODE ISSUES" below: Change window.alert to window.confirm and remove return "try again";
+    // // If user wants to continue, restart the function
+    // if (errorContinue) {
+    // // CODE ISSUE when you call "generatePassword()" it will run, give password, and then return "205" when it's done.
+    //   generatePassword();
+    //   return "205";
+    // } else {
+    //   // If user cancels, exit the function
+    //   window.alert("Understandable. Have a nice day. ✌️");
 
-    // If user wants to continue, restart the function
-    if (errorContinue) {
-      generatePassword();
-      return;
-    } else {
-      // If user cancels, exit the function
-      window.alert("Understandable. Have a nice day. ✌️");
-
-      return "Try Again";
-    }
+    //   return "210";
+    // }
   }
   // if specialChar selection is true, concat new array
 
   if (userSpecialChars) {
     finalUserArray = finalUserArray.concat(specialChars);
-    console.log(finalUserArray);
-    console.log(userCharCount);
   }
 
   // End of confirmation dialogues for choosing character types. Confirm selections to user.
@@ -239,17 +243,11 @@ generatePassword = function () {
     // remove "temp" from finalUserArray so it doesn't appear in generated password
 
     finalUserArray.shift();
-    console.log(finalUserArray);
-
-    // variable to collect the new password from the random number generator and array value picker below
-
-    var newPassword = "";
 
     // generate a random number for the length of the full concatenated password array
 
     for (let i = 0; i < userCharCount; i++) {
       var randomNumber = Math.floor(Math.random() * finalUserArray.length);
-      console.log(randomNumber);
 
       // The above random number will correspond to the index of a character within the array. Take that character and add it to the new generated password variable
 
@@ -258,17 +256,15 @@ generatePassword = function () {
 
     // Return the new value so that it sets the value of generatedPassword() to equal the newly generated password
 
-    console.log(newPassword);
-    //console.log(password);
     return newPassword;
   } else {
     // Prompt user to try again or cancel
     var errorContinue = window.confirm("Would you like to try again?");
     if (errorContinue) {
       generatePassword();
-      return;
+      return "260";
     } else {
-      return "Try again";
+      return "262";
     }
   }
 };
