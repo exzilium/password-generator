@@ -4,14 +4,14 @@
 
 The application allows a user to create a custom, randomly generated password using upper and lowercase letters, numbers, and special characters.
 
-Please see Usage for instructions.
+Please see 'Usage' for instructions.
 
 ![screenshot of the password generator](./Assets/images/pwg_readme.png)
 
 ## Usage
 
 <ol>
-<li>Navigate to the website on Github Pages.</li>
+<li>Navigate to the website on [Github Pages](https://exzilium.github.io/password-generator/).</li>
 <li>Click "Generate Password"</li>
 <li>Follow the prompts</li>
 <ul>
