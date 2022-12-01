@@ -2,7 +2,7 @@
 
 ## Description
 
-The application allows a user to create a custom, randomly generated password using upper and lowercase letters, numbers, and special characters.
+The application allows a user to create a secure, custom, randomly generated password using upper and lowercase letters, numbers, and special characters.
 
 Please see 'Usage' for instructions.
 
@@ -10,25 +10,21 @@ Please see 'Usage' for instructions.
 
 ## Usage
 
-<ol>
-<li>Navigate to the website on [Github Pages](https://exzilium.github.io/password-generator/).</li>
-<li>Click "Generate Password"</li>
-<li>Follow the prompts</li>
-<ul>
-<li>Choose number of characters to include (8-128)</li>
-<li>Choose the type of characters to use (Uppercase, lowercase, numbers, special characters)</li>
-</ul>
-<li>Confirm your selections</li>
-<li>The password will appear in the on-screen box. Copy it and enjoy!</li>
-</ol>
+1. Navigate to the website on [Github Pages](https://exzilium.github.io/password-generator/)
+2. Click "Generate Password"
+3. Follow the prompts to...
+4. Choose number of characters to include (8-128)
+5. Choose the type of characters to use (Uppercase, lowercase, numbers, special characters)
+6. Confirm your selections
+7. The password will appear in the on-screen box
+8. Copy it and enjoy!
 
 ## Credits
 
-<ul>
-<li>MDN web docs for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)</li>
-<li>Foolish Developer's [Random Password Generator using Javascript](https://dev.to/code_mystery/random-password-generator-using-javascript-6a)</li>
-<li>Geeks for Geeks [How to Generate a Random Password using JavaScript](https://www.geeksforgeeks.org/how-to-generate-a-random-password-using-javascript/)</li>
-</ul>
+
+- MDN web docs for [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- Foolish Developer's [Random Password Generator using Javascript](https://dev.to/code_mystery/random-password-generator-using-javascript-6a)
+- Geeks for Geeks [How to Generate a Random Password using JavaScript](https://www.geeksforgeeks.org/how-to-generate-a-random-password-using-javascript/)
 
 ## License
 
